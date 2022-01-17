@@ -1,4 +1,3 @@
-# test foo
 args = commandArgs(trailingOnly = TRUE)
 keep_path = args[1]
 outpath = args[2]
