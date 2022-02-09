@@ -19,7 +19,11 @@ keep_file_sample3=dall_ids.txt # id list for sample 3 (marginal offspring gwas),
 keep_file_sample4m=dtrios_ids_mothers_reorder.txt # id list for sample 4m (conditional trios gwas; maternal ids), written by MP_BMI_MR_hunt_analysis.R
 keep_file_sample4f=dtrios_ids_fathers_reorder.txt # id list for sample 4f (conditional trios gwas; paternal ids), written by MP_BMI_MR_hunt_analysis.R
 keep_file_sample4o=dtrios_ids_offspring.txt # id list for sample 4m/4f, offspring ids, written by MP_BMI_MR_hunt_analysis.R
+keep_file_sample4m_unrelated=dtrios_ids_mothers_all.txt # id list for sample 4m (conditional trios gwas; maternal ids), written by MP_BMI_MR_hunt_analysis.R
+keep_file_sample4f_unrelated=dtrios_ids_fathers_all.txt # id list for sample 4f (conditional trios gwas; paternal ids), written by MP_BMI_MR_hunt_analysis.R
+keep_file_sample4o_unrelated=dtrios_ids_offspring.txt # id list for sample 4m/4f, offspring ids, written by MP_BMI_MR_hunt_analysis.R
 linkage_file_sample4=dtrios_id_linker.txt # file to link mother, father and offspring ids for sample 4; should be in same directory as keep_file_sample4m; should have ids: "id_mo", "id_fa" and "id_of" for mother, father and offspring id respectively; written by MP_BMI_MR_hunt_analysis.R
+linkage_file_sample4_unrelated=dtrios_id_linker_original_ids.txt # file to link mother, father and offspring ids for sample 4; should be in same directory as keep_file_sample4m; should have ids: "id_mo", "id_fa" and "id_of" for mother, father and offspring id respectively; written by MP_BMI_MR_hunt_analysis.R
 grm_file_sample1=${cohort_name}_sample1_maternal_geno # grm file name for sample 1 (marginal maternal gwas)
 grm_file_sample2=${cohort_name}_sample2_paternal_geno # grm file name for sample 2 (marginal paternal gwas)
 grm_file_sample3=${cohort_name}_sample3_offspring_geno # grm file name for sample 3 (marginal offspring gwas)
@@ -35,9 +39,9 @@ sample1_bgen_file=hunt_sample1_mothers_chr${PBS_ARRAY_INDEX}.bgen # subsetted bg
 sample2_bgen_file=hunt_sample2_fathers_chr${PBS_ARRAY_INDEX}.bgen # subsetted bgen files for sample 2, written by subset_hunt_bgen_sample2.sh, chromosomes are indexed by ${PBS_ARRAY_INDEX}
 sample3_bgen_file=chr${PBS_ARRAY_INDEX}.bgen # bgen files for sample 3 (= original bgen files for full hunt smaple, i.e. not subsetted)
 n_yengo_snps=495 # number of yengo snps available with high imputaiton quality in hunt; should be 495
-sample4m_bgen_file=hunt_sample4_mothers_yengo_${n_yengo_snps}_bmi_snps_all_chr.bgen # bgen file containing just Yengo et al BMI snps, for mothers in sample 4m (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
-sample4f_bgen_file=hunt_sample4_fathers_yengo_${n_yengo_snps}_bmi_snps_all_chr.bgen # bgen file containing just Yengo et al BMI snps, for fathers in sample 4f (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
-sample4o_bgen_file=hunt_sample4_offspring_yengo_${n_yengo_snps}_bmi_snps_all_chr.bgen # bgen file containing just Yengo et al BMI snps, for offspring in sample 4m/4f (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
+sample4m_bgen_file=hunt_sample4_mothers_yengo_${n_yengo_snps}_bmi_snps_all_chr_unrelated.bgen # bgen file containing just Yengo et al BMI snps, for mothers in sample 4m (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
+sample4f_bgen_file=hunt_sample4_fathers_yengo_${n_yengo_snps}_bmi_snps_all_chr_unrelated.bgen # bgen file containing just Yengo et al BMI snps, for fathers in sample 4f (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
+sample4o_bgen_file=hunt_sample4_offspring_yengo_${n_yengo_snps}_bmi_snps_all_chr_unrelated.bgen # bgen file containing just Yengo et al BMI snps, for offspring in sample 4m/4f (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
 sample1_sample_path=${sample1_bgen_path} # path to subsetted bgen .sample files for sample 1 ("outpath" in subset_hunt_bgen_sample1.sh)
 sample2_sample_path=${sample2_bgen_path} # path to subsetted bgen .sample files for sample 2 ("outpath" in subset_hunt_bgen_sample2.sh)
 sample3_sample_path=${sample3_bgen_path} # path to bgen .sample files for sample 3 (= original bgen files for full hunt smaple, i.e. not subsetted)
@@ -45,9 +49,9 @@ sample4_sample_path=${sample4_bgen_path} # path to subsetted bgen .sample files 
 sample1_sample_file=hunt_sample1_mothers_chr${PBS_ARRAY_INDEX}.sample # subsetted bgen files for sample 1, written by subset_hunt_bgen_sample1.sh, chromosomes are indexed by ${PBS_ARRAY_INDEX}
 sample2_sample_file=hunt_sample2_mothers_chr${PBS_ARRAY_INDEX}.sample # subsetted bgen files for sample 2, written by subset_hunt_bgen_sample2.sh, chromosomes are indexed by ${PBS_ARRAY_INDEX}
 sample3_sample_file=chr${PBS_ARRAY_INDEX}.sample # bgen files for sample 3 (= original bgen files for full hunt smaple, i.e. not subsetted)
-sample4m_sample_file=hunt_sample4_mothers_yengo_${n_yengo_snps}_bmi_snps_all_chr.sample # bgen file containing just Yengo et al BMI snps, for mothers in sample 4m (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
-sample4f_sample_file=hunt_sample4_fathers_yengo_${n_yengo_snps}_bmi_snps_all_chr.sample # bgen file containing just Yengo et al BMI snps, for fathers in sample 4f (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
-sample4o_sample_file=hunt_sample4_offspring_yengo_${n_yengo_snps}_bmi_snps_all_chr.sample # bgen file containing just Yengo et al BMI snps, for offspring in sample 4m/4f (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
+sample4m_sample_file=hunt_sample4_mothers_yengo_${n_yengo_snps}_bmi_snps_all_chr_unrelated.sample # bgen file containing just Yengo et al BMI snps, for mothers in sample 4m (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
+sample4f_sample_file=hunt_sample4_fathers_yengo_${n_yengo_snps}_bmi_snps_all_chr_unrelated.sample # bgen file containing just Yengo et al BMI snps, for fathers in sample 4f (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
+sample4o_sample_file=hunt_sample4_offspring_yengo_${n_yengo_snps}_bmi_snps_all_chr_unrelated.sample # bgen file containing just Yengo et al BMI snps, for offspring in sample 4m/4f (one file containing all 22 autosomes); written by subset_hunt_bgen_495_yengo_bmi_snps.sh
 out_path=/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/results/gwas/duos_trios/ # output path for gwas results
 phen_path=/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/data/ukb/phen/ # path to phenotype files
 covars_path=${phen_path} # path to covariate files
@@ -62,8 +66,8 @@ snp_list=yengo_bmi_snps_manual_version_ukb_alspac_hunt_maf_0_01_r2_0_8_rsids.txt
 if [[ ${sample} == '1' ]]; then keep_file_sample=${keep_file_sample1}; grm_file_sample=${grm_file_sample1}; sample_path=${sample1_sample_path}; sample_file=${sample1_sample_file}; fi
 if [[ ${sample} == '2' ]]; then keep_file_sample=${keep_file_sample2}; grm_file_sample=${grm_file_sample2}; sample_path=${sample2_sample_path}; sample_file=${sample2_sample_file}; fi
 if [[ ${sample} == '3' ]]; then keep_file_sample=${keep_file_sample3}; grm_file_sample=${grm_file_sample3}; sample_path=${sample3_sample_path}; sample_file=${sample3_sample_file}; fi
-if [[ ${sample} == '4m' ]]; then keep_file_sample=${keep_file_sample4m}; grm_file_sample=${grm_file_sample4m}; sample_path=${sample4m_sample_path}; sample_file=${sample4m_sample_file}; sample_bgen_file=${sample4m_bgen_file}; fi
-if [[ ${sample} == '4f' ]]; then keep_file_sample=${keep_file_sample4f}; grm_file_sample=${grm_file_sample4f}; sample_path=${sample4f_sample_path}; sample_file=${sample4f_sample_file}; sample_bgen_file=${sample4f_bgen_file}; fi
+if [[ ${sample} == '4m' ]]; then keep_file_sample=${keep_file_sample4m_unrelated}; grm_file_sample=${grm_file_sample4m}; sample_path=${sample4m_sample_path}; sample_file=${sample4m_sample_file}; sample_bgen_file=${sample4m_bgen_file}; fi
+if [[ ${sample} == '4f' ]]; then keep_file_sample=${keep_file_sample4f_unrelated}; grm_file_sample=${grm_file_sample4f}; sample_path=${sample4f_sample_path}; sample_file=${sample4f_sample_file}; sample_bgen_file=${sample4f_bgen_file}; fi
 threads=20 # number of cores available
 maf=0.01
 info=0.3

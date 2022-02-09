@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# combine partial GRMs (see https://cnsgenomics.com/software/gcta/#MakingaGRM)
+# prune GRM to create sparse GRM
 # this script is not memory or time intensive so it should be possible to run it interactively
 
 ################################################################################
@@ -12,9 +12,10 @@ gen_file=ukb_cal_chr1_22_v2_cleaned # filename stem for plink 1 binary fileset; 
 out_file_sample1=${cohort_name}_sample1_maternal_geno # output file name for sample 1 (marginal maternal gwas)
 out_file_sample2=${cohort_name}_sample2_paternal_geno # output file name for sample 2 (marginal paternal gwas)
 out_file_sample3=${cohort_name}_sample3_offspring_geno # output file name for sample 3 (marginal offspring gwas)
-out_file_sample4m=${cohort_name}_sample4m_maternal_geno # output file name for sample 4m (conditional trios gwas; maternal ids)
-out_file_sample4f=${cohort_name}_sample4f_paternal_geno # output file name for sample 4f (conditional trios gwas; paternal ids)
-out_files=(${out_file_sample1} ${out_file_sample2} ${out_file_sample3} ${out_file_sample4m} ${out_file_sample4f})
+#out_file_sample4m=${cohort_name}_sample4m_maternal_geno # output file name for sample 4m (conditional trios gwas; maternal ids); n.b. no longer required, because we are only analysing relateds
+#out_file_sample4f=${cohort_name}_sample4f_paternal_geno # output file name for sample 4f (conditional trios gwas; paternal ids); n.b. no longer required, because we are only analysing relateds
+#out_files=(${out_file_sample1} ${out_file_sample2} ${out_file_sample3} ${out_file_sample4m} ${out_file_sample4f})
+out_files=(${out_file_sample1} ${out_file_sample2} ${out_file_sample3}) # n.b.- we now no longer need to calculate the GRMs for samples 4m and 4f, because we are only analysing relateds
 out_path=/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/data/ukb/ # output path
 ################################################################################
 
@@ -34,11 +35,12 @@ keep_files=(${keep_file_sample1} ${keep_file_sample2} ${keep_file_sample3} ${kee
 # combine grms
 for((i = 0; i < ${#out_files[@]}; i++)); do
   echo $i
-  keep_file=${keep_files[${i}]}
   out_file=${out_files[${i}]}
-  cat ${out_path}${out_file}.part_${grm_parts}_*.grm.id > ${out_path}${out_file}.grm.id
-  cat ${out_path}${out_file}.part_${grm_parts}_*.grm.bin > ${out_path}${out_file}.grm.bin
-  cat ${out_path}${out_file}.part_${grm_parts}_*.grm.N.bin > ${out_path}${out_file}.grm.N.bin
+  ${gcta} \
+  		--grm ${out_path}${out_file} \
+  		--make-bK-sparse 0.05 \
+  		--threads 20 \
+  		--out ${out_path}${out_file}_sparse_0_05
 done
 
 

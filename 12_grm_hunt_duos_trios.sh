@@ -22,9 +22,10 @@ gen_file_sample4f=${cohort_name}_sample4f_paternal_geno # filename stem for plin
 out_file_sample1=${cohort_name}_sample1_maternal_geno # output file name for sample 1 (marginal maternal gwas)
 out_file_sample2=${cohort_name}_sample2_paternal_geno # output file name for sample 2 (marginal paternal gwas)
 out_file_sample3=${cohort_name}_sample3_offspring_geno # output file name for sample 3 (marginal offspring gwas)
-out_file_sample4m=${cohort_name}_sample4m_maternal_geno # output file name for sample 4m (conditional trios gwas; maternal ids)
-out_file_sample4f=${cohort_name}_sample4f_paternal_geno # output file name for sample 4f (conditional trios gwas; paternal ids)
-out_files=(${out_file_sample1} ${out_file_sample2} ${out_file_sample3} ${out_file_sample4m} ${out_file_sample4f})
+#out_file_sample4m=${cohort_name}_sample4m_maternal_geno # output file name for sample 4m (conditional trios gwas; maternal ids); n.b. no longer required, because we are only analysing relateds
+#out_file_sample4f=${cohort_name}_sample4f_paternal_geno # output file name for sample 4f (conditional trios gwas; paternal ids); n.b. no longer required, because we are only analysing relateds
+#out_files=(${out_file_sample1} ${out_file_sample2} ${out_file_sample3} ${out_file_sample4m} ${out_file_sample4f})
+out_files=(${out_file_sample1} ${out_file_sample2} ${out_file_sample3}) # n.b.- we now no longer need to calculate the GRMs for samples 4m and 4f, because we are only analysing relateds
 grm_out_path=/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/data/ukb/ # output path
 ################################################################################
 
@@ -36,7 +37,7 @@ source ${script_path}${cohort_name}_params.sh # read in additional variables fro
 keep_files=(${keep_file_sample1} ${keep_file_sample2} ${keep_file_sample3} ${keep_file_sample4m} ${keep_file_sample4f})
 gen_files=(${gen_file_sample1} ${gen_file_sample2} ${gen_file_sample3} ${gen_file_sample4m} ${gen_file_sample4f})
 
-# calculate grm part: loop over 5 samples
+# calculate grm part: loop over 3 samples (n.b.- we now no longer need to calculate the GRMs for samples 4m and 4f, because we are only analysing relateds)
 for((i = 0; i < ${#out_files[@]}; i++)); do
   keep_file=${keep_files[${i}]}
   gen_file=${gen_files[${i}]}

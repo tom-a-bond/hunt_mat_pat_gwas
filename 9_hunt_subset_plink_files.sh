@@ -39,18 +39,19 @@ for j in {1..6}; do
   --make-bed \
   --out ${out_path_gen}${out_file_sample2}_${j}
   # sample 3 does not need to be subsetted, because it will be the full hunt sample
-  # sample 4m (maternal genotype)
-  ${plink2} \
-  --bfile ${gen_path}${gen_file} \
-  --keep ${keep_path}dtrios_ids_mothers_${j}.txt \
-  --make-bed \
-  --out ${out_path_gen}${out_file_sample4m}_${j}
-  # sample 4f (paternal genotype)
-  ${plink2} \
-  --bfile ${gen_path}${gen_file} \
-  --keep ${keep_path}dtrios_ids_fathers_${j}.txt \
-  --make-bed \
-  --out ${out_path_gen}${out_file_sample4f}_${j}
+  # n.b.- we now no longer need to create the bed/bim/fam files for samples 4m and 4f, because we are only analysing relateds so don't need to calculate the grms
+  # # sample 4m (maternal genotype)
+  # ${plink2} \
+  # --bfile ${gen_path}${gen_file} \
+  # --keep ${keep_path}dtrios_ids_mothers_${j}.txt \
+  # --make-bed \
+  # --out ${out_path_gen}${out_file_sample4m}_${j}
+  # # sample 4f (paternal genotype)
+  # ${plink2} \
+  # --bfile ${gen_path}${gen_file} \
+  # --keep ${keep_path}dtrios_ids_fathers_${j}.txt \
+  # --make-bed \
+  # --out ${out_path_gen}${out_file_sample4f}_${j}
 done
 
 # PLEASE CHECK THAT THE .fam FILES WRITTEN ABOVE HAVE THE CORRECT NUMBER OF IDS (I.E. THE SAME AS IN THE ID LISTS [dmo_ids_mothers_${j}.txt etc.])
@@ -100,35 +101,37 @@ ${plink1_9} \
 
 # sample 3 does not need to be subsetted
 
-# sample 4m
-# write list of files to merge
-echo ${out_path_gen}${out_file_sample4m}_1.bed ${out_path_gen}${out_file_sample4m}_1.bim ${out_path_gen}${out_file_sample4m}_1_suffixes.fam > \
-${out_path_gen}plink_files_list_${out_file_sample4m}.txt
-for i in {2..6}; do
-  echo ${out_path_gen}${out_file_sample4m}_${i}.bed ${out_path_gen}${out_file_sample4m}_${i}.bim ${out_path_gen}${out_file_sample4m}_${i}_suffixes.fam >> \
-  ${out_path_gen}plink_files_list_${out_file_sample4m}.txt
-done
-# merge
-${plink1_9} \
---merge-list ${out_path_gen}plink_files_list_${out_file_sample4m}.txt \
---indiv-sort file ${keep_path}dtrios_ids_mothers_reorder.txt \
---make-bed \
---out ${out_path_gen}${out_file_sample4m}
+# n.b.- we now no longer need to create the bed/bim/fam files for samples 4m and 4f, because we are only analysing relateds so don't need to calculate the grms
 
-# sample 4f
-# write list of files to merge
-echo ${out_path_gen}${out_file_sample4f}_1.bed ${out_path_gen}${out_file_sample4f}_1.bim ${out_path_gen}${out_file_sample4f}_1_suffixes.fam > \
-${out_path_gen}plink_files_list_${out_file_sample4f}.txt
-for i in {2..6}; do
-  echo ${out_path_gen}${out_file_sample4f}_${i}.bed ${out_path_gen}${out_file_sample4f}_${i}.bim ${out_path_gen}${out_file_sample4f}_${i}_suffixes.fam >> \
-  ${out_path_gen}plink_files_list_${out_file_sample4f}.txt
-done
-# merge
-${plink1_9} \
---merge-list ${out_path_gen}plink_files_list_${out_file_sample4f}.txt \
---indiv-sort file ${keep_path}dtrios_ids_fathers_reorder.txt \
---make-bed \
---out ${out_path_gen}${out_file_sample4f}
+# # sample 4m
+# # write list of files to merge
+# echo ${out_path_gen}${out_file_sample4m}_1.bed ${out_path_gen}${out_file_sample4m}_1.bim ${out_path_gen}${out_file_sample4m}_1_suffixes.fam > \
+# ${out_path_gen}plink_files_list_${out_file_sample4m}.txt
+# for i in {2..6}; do
+#   echo ${out_path_gen}${out_file_sample4m}_${i}.bed ${out_path_gen}${out_file_sample4m}_${i}.bim ${out_path_gen}${out_file_sample4m}_${i}_suffixes.fam >> \
+#   ${out_path_gen}plink_files_list_${out_file_sample4m}.txt
+# done
+# # merge
+# ${plink1_9} \
+# --merge-list ${out_path_gen}plink_files_list_${out_file_sample4m}.txt \
+# --indiv-sort file ${keep_path}dtrios_ids_mothers_reorder.txt \
+# --make-bed \
+# --out ${out_path_gen}${out_file_sample4m}
+# 
+# # sample 4f
+# # write list of files to merge
+# echo ${out_path_gen}${out_file_sample4f}_1.bed ${out_path_gen}${out_file_sample4f}_1.bim ${out_path_gen}${out_file_sample4f}_1_suffixes.fam > \
+# ${out_path_gen}plink_files_list_${out_file_sample4f}.txt
+# for i in {2..6}; do
+#   echo ${out_path_gen}${out_file_sample4f}_${i}.bed ${out_path_gen}${out_file_sample4f}_${i}.bim ${out_path_gen}${out_file_sample4f}_${i}_suffixes.fam >> \
+#   ${out_path_gen}plink_files_list_${out_file_sample4f}.txt
+# done
+# # merge
+# ${plink1_9} \
+# --merge-list ${out_path_gen}plink_files_list_${out_file_sample4f}.txt \
+# --indiv-sort file ${keep_path}dtrios_ids_fathers_reorder.txt \
+# --make-bed \
+# --out ${out_path_gen}${out_file_sample4f}
 
 # PLEASE CHECK THAT THE .fam FILES PRODUCED IMMEDIATELY ABOVE HAVE THE CORRECT NUMBER OF IDS
 # (I.E. IT SHOULD BE THE SAME NUMBER OF IDS AS IN dmo, dfo AND dtrios RESPECTIVELY)

@@ -24,7 +24,7 @@ for(j in 1:length(outcomes)){
   run = paste0(cohort_name, '_', sample, '_', outcome)
   setwd(paste0(out_path, run))
   file_list = list.files()
-  out_files = file_list[grep('.fastGWA', file_list)]
+  out_files = file_list[grep('.glm.linear', file_list)]
   if(length(out_files) != n_snps){ missings = c(missings, outcome) }
 }
 missings
@@ -37,7 +37,7 @@ for(j in 1:length(outcomes)){
   run = paste0(cohort_name, '_', sample, '_', outcome)
   setwd(paste0(out_path, run))
   file_list = list.files()
-  out_files = file_list[grep('.fastGWA', file_list)]
+  out_files = file_list[grep('.glm.linear', file_list)]
   if(length(out_files) != n_snps){ stop('Results for one or more snps appear to be missing') }
   res = lapply(as.list(out_files), fread, header = TRUE, data.table = FALSE) %>% do.call(rbind, .)
   fwrite(res, paste0('../', cohort_name, '_sample_', sample, '_', outcome, '_all_snps.fastGWA.gz'),

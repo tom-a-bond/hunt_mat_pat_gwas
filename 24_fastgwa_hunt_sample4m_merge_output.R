@@ -7,7 +7,7 @@ library(data.table)
 
 rm(list = ls())
 cohort_name = 'hunt' # cohort name; one of "ukb", "hunt", "alspac"
-sample = '4f' # 4m or 4f
+sample = '4m' # 4m or 4f
 snp_list_path = '/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/data/' # path to list of Yengo et al BMI snps (yengo_bmi_snps_manual_version_ukb_alspac_hunt_maf_0_01_r2_0_8_rsids.txt)
 out_path = '/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/results/gwas/duos_trios/' # output path (directory containing folders written by fastgwa_hunt_sample4m.sh)
 snp_list = 'yengo_bmi_snps_manual_version_ukb_alspac_hunt_maf_0_01_r2_0_8_rsids.txt'
@@ -24,7 +24,7 @@ for(j in 1:length(outcomes)){
   run = paste0(cohort_name, '_', sample, '_', outcome)
   setwd(paste0(out_path, run))
   file_list = list.files()
-  out_files = file_list[grep('.fastGWA', file_list)]
+  out_files = file_list[grep('.glm.linear', file_list)]
   if(length(out_files) != n_snps){ missings = c(missings, outcome) }
 }
 missings
@@ -37,7 +37,7 @@ for(j in 1:length(outcomes)){
   run = paste0(cohort_name, '_', sample, '_', outcome)
   setwd(paste0(out_path, run))
   file_list = list.files()
-  out_files = file_list[grep('.fastGWA', file_list)]
+  out_files = file_list[grep('.glm.linear', file_list)]
   if(length(out_files) != n_snps){ stop('Results for one or more snps appear to be missing') }
   res = lapply(as.list(out_files), fread, header = TRUE, data.table = FALSE) %>% do.call(rbind, .)
   fwrite(res, paste0('../', cohort_name, '_sample_', sample, '_', outcome, '_all_snps.fastGWA.gz'),

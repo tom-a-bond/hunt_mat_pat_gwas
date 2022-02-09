@@ -37,25 +37,27 @@ for i in {1..22}; do
   ${sample_path}${sample_file}
 done
 
+# n.b. samples 4m and 4f probably do not require editing now we are only analysing unrelateds, because plink will probably read them (i.e. the sample files written in 9_hunt_sample4_subset_unrelated.sh) fine
+
 # sample 4m
 
-sample=4m
-source ${script_path}${cohort_name}_params.sh
-mv ${sample_path}${sample_file} ${sample_path}${sample_file}.nosexcol
-awk '{print $1, $2, $3, $3}' ${sample_path}${sample_file}.nosexcol | \
-awk 'NR == 1 {$4 = "sex"}1' | \
-awk 'NR == 2 {$4 = "D"}1' > \
-${sample_path}${sample_file}
+# sample=4m
+# source ${script_path}${cohort_name}_params.sh
+# mv ${sample_path}${sample_file} ${sample_path}${sample_file}.nosexcol
+# awk '{print $1, $2, $3, $3}' ${sample_path}${sample_file}.nosexcol | \
+# awk 'NR == 1 {$4 = "sex"}1' | \
+# awk 'NR == 2 {$4 = "D"}1' > \
+# ${sample_path}${sample_file}
 
 # sample 4f
 
-sample=4f
-source ${script_path}${cohort_name}_params.sh
-mv ${sample_path}${sample_file} ${sample_path}${sample_file}.nosexcol
-awk '{print $1, $2, $3, $3}' ${sample_path}${sample_file}.nosexcol | \
-awk 'NR == 1 {$4 = "sex"}1' | \
-awk 'NR == 2 {$4 = "D"}1' > \
-${sample_path}${sample_file}
+# sample=4f
+# source ${script_path}${cohort_name}_params.sh
+# mv ${sample_path}${sample_file} ${sample_path}${sample_file}.nosexcol
+# awk '{print $1, $2, $3, $3}' ${sample_path}${sample_file}.nosexcol | \
+# awk 'NR == 1 {$4 = "sex"}1' | \
+# awk 'NR == 2 {$4 = "D"}1' > \
+# ${sample_path}${sample_file}
 
 # sample 4o (used for samples 4m and 4f, but probably does not require editing, assuing plink is not as fussy as gcta)
 
