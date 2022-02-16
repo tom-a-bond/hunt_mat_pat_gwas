@@ -9,7 +9,7 @@ library(data.table)
 for(i in 1:6){
   # sample 1
   fam_1 = fread(paste0(outpath, out_file_sample1, '_', i, '.fam'),
-                data.table = FALSE, header = FALSE, skip = 2)
+                data.table = FALSE, header = FALSE)
   suffix_1 = fread(paste0(keep_path, 'dmo_id_suffixes_mothers_', i, '.txt'),
                    data.table = FALSE, header = TRUE)
   if(nrow(fam_1) != nrow(suffix_1)){ Stop(paste0('fam file and suffix file for sample 1 have different number of rows (i = ', i, ')')) }
@@ -19,7 +19,7 @@ for(i in 1:6){
          sep = '\t', row.names = FALSE, col.names = FALSE, quote = FALSE)
   # sample 2
   fam_2 = fread(paste0(outpath, out_file_sample2, '_', i, '.fam'),
-                data.table = FALSE, header = FALSE, skip = 2)
+                data.table = FALSE, header = FALSE)
   suffix_2 = fread(paste0(keep_path, 'dfo_id_suffixes_fathers_', i, '.txt'),
                    data.table = FALSE, header = TRUE)
   if(nrow(fam_2) != nrow(suffix_2)){ Stop(paste0('fam file and suffix file for sample 2 have different number of rows (i = ', i, ')')) }
