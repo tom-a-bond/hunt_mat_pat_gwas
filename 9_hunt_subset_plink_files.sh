@@ -59,13 +59,13 @@ done
 # add suffixes to parental ids
 
 export MODULEPATH=/sw/el7/modulefiles; module load R/4.0.5 # put any commands required to get Rscript.exe "in path" here
-Rscript ${script_path}add_suffixes_plink_files.R \
+Rscript ${script_path}0_add_suffixes_plink_files.R \
 ${keep_path} \
 ${out_path_gen} \
 ${out_file_sample1} \
-${out_file_sample2} \
-${out_file_sample4m} \
-${out_file_sample4f}
+${out_file_sample2} 
+# ${out_file_sample4m} \
+# ${out_file_sample4f}
 
 # merge parental files for sibs 1-6, and reorder parental files so that they match up with the offspring files
 
@@ -80,7 +80,6 @@ done
 # merge
 ${plink1_9} \
 --merge-list ${out_path_gen}plink_files_list_${out_file_sample1}.txt \
---indiv-sort file ${keep_path}dmo_ids_mothers_reorder.txt \
 --make-bed \
 --out ${out_path_gen}${out_file_sample1}
 
@@ -95,7 +94,6 @@ done
 # merge
 ${plink1_9} \
 --merge-list ${out_path_gen}plink_files_list_${out_file_sample2}.txt \
---indiv-sort file ${keep_path}dfo_ids_fathers_reorder.txt \
 --make-bed \
 --out ${out_path_gen}${out_file_sample2}
 

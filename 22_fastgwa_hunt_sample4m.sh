@@ -11,7 +11,7 @@
 cohort_name=hunt # cohort name; one of "ukb", "hunt", "alspac"
 sample=4m # 4m or 4f
 script_path=/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/scripts/ # path to directory where scripts are kept
-source ${script_path}${cohort_name}_params.sh
+source ${script_path}0_${cohort_name}_params.sh
 threads=1 # manually override the variable loaded by the params script
 snps=(`cat ${snp_list_path}${snp_list}`)
 outcome=${outcomes[${PBS_ARRAY_INDEX}]}
@@ -65,7 +65,7 @@ for((i = 0; i < ${#snps[@]}; i++)); do
   covar_file_name=sample${sample}_${outcome}_unrelated.covar
 
   # append parental and offspring genotype to continous covariate file
-  Rscript ${script_path}sample4_append_geno_covars_file_hunt.R \
+  Rscript ${script_path}0_sample4_append_geno_covars_file_hunt.R \
   ${phen_path}${covar_file_name} \
   ${out_path}${run}/${cohort_name}_trios_mothers_${snp}.raw \
   ${out_path}${run}/${cohort_name}_trios_fathers_${snp}.raw \

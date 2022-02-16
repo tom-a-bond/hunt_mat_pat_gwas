@@ -33,7 +33,7 @@ grm_out_path=/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/data/ukb/ # output
 grm_parts=20 # number of parts to split the grm calculation into (higher number = lower time/memory requirements)
 threads=20 # number of cores available
 maf=0.01
-source ${script_path}${cohort_name}_params.sh # read in additional variables from ${cohort_name}_params.sh
+source ${script_path}0_${cohort_name}_params.sh # read in additional variables from ${cohort_name}_params.sh
 keep_files=(${keep_file_sample1} ${keep_file_sample2} ${keep_file_sample3} ${keep_file_sample4m} ${keep_file_sample4f})
 gen_files=(${gen_file_sample1} ${gen_file_sample2} ${gen_file_sample3} ${gen_file_sample4m} ${gen_file_sample4f})
 
@@ -44,7 +44,6 @@ for((i = 0; i < ${#out_files[@]}; i++)); do
   out_file=${out_files[${i}]}
   ${gcta} \
   		--bfile ${gen_path}${gen_file} \
-  		--keep ${keep_path}${keep_file} \
   		--maf ${maf} \
   		--autosome \
   		--make-grm-part ${grm_parts} ${PBS_ARRAY_INDEX} \

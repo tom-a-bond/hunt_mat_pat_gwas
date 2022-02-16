@@ -11,7 +11,7 @@
 cohort_name=hunt # cohort name; one of "ukb", "hunt", "alspac"
 sample=3
 script_path=/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/scripts/ # path to directory where scripts are kept
-source ${script_path}${cohort_name}_params.sh
+source ${script_path}0_${cohort_name}_params.sh
 
 for((i = 0; i < ${#outcomes[@]}; i++)); do
   outcome=${outcomes[${i}]}
@@ -21,7 +21,6 @@ for((i = 0; i < ${#outcomes[@]}; i++)); do
   ${gcta} \
 		--bgen ${bgen_path}${bgen_file} \
 		--sample ${sample_path}${sample_file} \
-  	--keep ${keep_path}${keep_file_sample} \
 		--maf ${maf} \
 		--info ${info} \
 		--autosome \

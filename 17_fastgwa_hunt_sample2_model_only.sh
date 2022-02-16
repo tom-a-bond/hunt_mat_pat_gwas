@@ -13,7 +13,7 @@
 cohort_name=hunt # cohort name; one of "ukb", "hunt", "alspac"
 sample=2
 script_path=/dmf/uqdi/HPC/PBSHOME/ttbond/proj/mat_pat_bmi_mr/scripts/
-source ${script_path}${cohort_name}_params.sh
+source ${script_path}0_${cohort_name}_params.sh
 
 # run fastgwa
 #for((i = 0; i < ${#outcomes[@]}; i++)); do
@@ -28,7 +28,6 @@ source ${script_path}${cohort_name}_params.sh
 		--grm-sparse ${grm_path}${grm_file_sample}_sparse_0_05 \
 		--mbgen ${imp_path}${cohort_name}_sample2_fathers_bgen_list.txt \
 		--sample ${sample_path}${sample_file} \
-		--keep ${keep_path}${keep_file_sample} \
 		--pheno ${phen_path}sample${sample}_${outcome}.phen \
 		--qcovar ${phen_path}${qcovar_file_name} \
 		--covar ${phen_path}${covar_file_name} \
