@@ -103,4 +103,4 @@ rm \${in_file_stem}_tmp_ldhub_qc.tbl.gz
 eof1
 
 chmod +x ${script_name}
-sbatch ${script_name}
+#sbatch ${script_name}
