@@ -104,7 +104,7 @@ donuts[ , c('ID.y', 'ID.x')] <- NULL
 donuts <- donuts[ , c("rsid", "SNP", "CHR", "BP", "A1", "A2",
                       "beta.ss2", "se.ss2", "p.ss2", "n.ss2",
                       "beta.own", "se.own", "p.own", "n.own",
-                      "beta.ind", "se.ind", "p.ind", "n.ind",
+                      "beta.ind.ss2", "se.ind.ss2", "p.ind.ss2", "n.ind.ss2",
                       "beta.dir", "se.dir", "p.dir", "n.dir")]
 names(donuts) <- c("rsid", "chr_pos_a1_a2", "chr", "pos", "a1", "a2",
                    "beta_mat", "se_mat", "p_mat", "n_mat",
